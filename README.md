@@ -13,15 +13,17 @@ A simple Node.js application that fetches and stores movies from the TMDb API an
 
 ## Setup Instructions
 
-### 1. Clone the repository
+### 1. Clone or download the repository
 git clone https://github.com/your-username/myMovies.git
 cd myMovies
+
+If you haven't cloned the repository, you can download it as a ZIP from GitHub and extract it to your local machine.
 
 ### 2. Install dependencies
 npm install
 This will install all dependencies listed in package.json, including Express, SQLite, and other required packages.
 
-### Find .env file
+### Create .env file in src folder
 TMDB_API_KEY=<your_tmdb_API_key_goes_here>
 replace <your_tmdb_API_key_goes_here> with your API key (you can get one on https://www.themoviedb.org/settings/api)
 
