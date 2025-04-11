@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Maria">
+    <title>myMovies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a6c1a36bc7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <header>
+
+        <div class="searchbox">
+            <h1>my movies</h1>
+            <form class="searching" action="/" method="GET">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" name="search" placeholder="Find a movie ...">
+                <button type="submit">Search</button>
+            </form>
+
+            <form method="GET" class="sorting" action="/">
+                <select name="sort">
+                    <option value="">Sort by</option>
+                    <option value="title_asc">Title: a-z</option>
+                    <option value="title_desc">Title: z-a</option>
+                    <option value="popularity">Popularity</option>
+                    <option value="vote_average">Vote average</option>
+                </select>
+                <button type="Submit">Submit</button>
+            </form>
+        </div>
+    </header>
+    <aside>
+        <nav>
+            <a href="/">MOVIES</a>
+            <a href="/edit">+ ADD</a>
+        </nav>
+    </aside>
+
+    <main>
+        <% if (movies.length === 0) { %>
+            <p>No movies in database.</p>
+        <% } else { %>
+            <% movies.forEach(movie => { %>
+                <article class="movie">
+                    <% if (movie.poster_path) { %>
+                        <img src="<%= movie.poster_path.startsWith('/images')
+                            ? movie.poster_path
+                            : 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + movie.poster_path %>"
+                            alt="<%= movie.title %>" class="movie-poster" />
+                    <% } else { %>
+                        <img src="/images/placeholder.png" alt="No image available" class="movie-poster" />
+                    <% } %>
+    
+                    <div class="content">
+                        <div class="symbols">
+                            <a href="/delete/<%= movie.id %>" class="delete-movie">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                            <a href="#" class="edit-movie" data-id="<%= movie.id %>" data-title="<%= movie.title %>"
+                                data-vote="<%= movie.vote_average %>" data-popularity="<%= movie.popularity %>"
+                                data-adult="<%= movie.adult %>" data-release="<%= movie.release_date %>"
+                                data-poster="<%= movie.poster_path %>">
+                                <i class="fa-solid fa-gears"></i>
+                            </a>
+                            <h3>id: <%= movie.id %></h3>
+                        </div>
+                        <h2><%= movie.title %></h2>
+                        <p>vote average: <%= movie.vote_average %></p>
+                        <p>popularity: <%= movie.popularity %></p>
+                        <p>adult: <%= movie.adult ? 'yes' : 'no' %></p>
+                        <p>release date: <%= movie.release_date %></p>
+                    </div>
+                </article>
+            <% }); %>
+        <% } %>
+    
+        <div id="editPopup" class="popup hidden">
+            <form id="editForm" method="POST" action="/modify" enctype="multipart/form-data">
+                <input type="hidden" name="id" id="edit-id">
+    
+                <label for="edit-title">Title:</label>
+                <input type="text" id="edit-title" name="title" required>
+    
+                <label for="edit-voteavr">Vote average:</label>
+                <input type="number" step="1" id="edit-voteavr" name="vote_average">
+    
+                <label for="edit-popularity">Popularity:</label>
+                <input type="number" step="1" id="edit-popularity" name="popularity">
+    
+                <label for="edit-adult">Adult:</label>
+                <input type="number" step="1" id="edit-adult" name="adult" min="0" max="1" required>
+    
+                <label for="edit-releasedate">Release date:</label>
+                <input type="date" id="edit-releasedate" name="release_date" required>
+    
+                <label for="edit-image">Change poster:</label>
+                <input type="file" name="image" accept="image/*">
+    
+                <div class="buttons">
+                    <button type="submit">Save changes</button>
+                    <button type="button" id="cancelEditBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <footer>
+        <div id="pagination" class="pagination"></div>
+
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" description="IE=edge">
+    <meta name="viewport" description="width=device-width, initial-scale=1.0">
+    <meta name="author" description="Maria">
+    <title>myMovies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a6c1a36bc7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <header>
+
+        <div class="searchbox">
+            <h1>my movies</h1>
+            <form class="searching" action="/" method="GET">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" name="search" placeholder="Find a movie ...">
+                <button type="submit">Search</button>
+            </form>
+
+        </div>
+    </header>
+    <aside>
+        <nav>
+            <a href="/">MOVIES</a>
+            <a href="/edit">+ ADD</a>
+        </nav>
+    </aside>
+
+    <main>
+        <div class="edit">
+            <!-- Formula to add movie -->
+            <form id="addRecipeForm" action="/add" enctype="multipart/form-data">
+                <h3>Add movie:</h3>
+
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="vote_average">vote average:</label>
+                <input type="number" step="1" id="vote_average" name="vote_average">
+
+                <label for="popularity">popularity:</label>
+                <input type="number" step="1" id="popularity" name="popularity">
+
+                <label for="adult">adult:</label>
+                <input type="number" step="1" id="adult" name="adult" min="0" max="1" required>
+
+                <label for="release_date">release date:</label>
+                <input type="date" id="release_date" name="release_date" required>
+
+                <label for="image">Add poster:</label>
+                <input type="file" name="image" accept="image/*">
+
+                <button type="submit">Add</button>
+            </form>
+            <br>
+
+        </div>
+
+    </main>
+    <footer>
+        <p>myMovies</p>
+    </footer>
+    <script src="/script.js"></script>
+</body>
+
+</html>
